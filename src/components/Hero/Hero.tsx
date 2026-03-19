@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import MonsteraIcon from '../MonsteraIcon/MonsteraIcon'
 import { ScrollIndicator } from '../ScrollIndicator/ScrollIndicator'
 import styles from './Hero.module.css'
@@ -76,7 +76,19 @@ function renderTypedSegments(
 export function Hero({ brandName, tagline, subtext, ctaLabel }: HeroProps) {
   const [phase, setPhase] = useState(0)
   const [typedCount, setTypedCount] = useState(0)
-  const isTyping = phase >= 4
+  const isTyping = phase >= 5
+  const brandRef = useRef<HTMLParagraphElement>(null)
+  const [splashOffset, setSplashOffset] = useState({ x: 0, y: 0 })
+
+  useLayoutEffect(() => {
+    if (brandRef.current) {
+      const rect = brandRef.current.getBoundingClientRect()
+      setSplashOffset({
+        x: window.innerWidth / 2 - (rect.left + rect.width / 2),
+        y: window.innerHeight / 2 - (rect.top + rect.height / 2),
+      })
+    }
+  }, [])
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
@@ -84,28 +96,30 @@ export function Hero({ brandName, tagline, subtext, ctaLabel }: HeroProps) {
     ).matches
 
     if (prefersReducedMotion) {
-      setPhase(6)
+      setPhase(7)
       setTypedCount(subtext.length)
       return
     }
 
     const t1 = setTimeout(() => setPhase(1), 50)
-    const t2 = setTimeout(() => setPhase(2), 800)
-    const t3 = setTimeout(() => setPhase(3), 1500)
-    const t4 = setTimeout(() => setPhase(4), 3500)
+    const t2 = setTimeout(() => setPhase(2), 550)
+    const t3 = setTimeout(() => setPhase(3), 1800)
+    const t4 = setTimeout(() => setPhase(4), 1800)
+    const t5 = setTimeout(() => setPhase(5), 3000)
 
     return () => {
       clearTimeout(t1)
       clearTimeout(t2)
       clearTimeout(t3)
       clearTimeout(t4)
+      clearTimeout(t5)
     }
   }, [subtext.length])
 
   useEffect(() => {
     if (!isTyping || typedCount >= subtext.length) {
-      if (typedCount >= subtext.length && phase === 4) {
-        setPhase(5)
+      if (typedCount >= subtext.length && phase === 5) {
+        setPhase(6)
       }
       return
     }
@@ -114,10 +128,10 @@ export function Hero({ brandName, tagline, subtext, ctaLabel }: HeroProps) {
     return () => clearTimeout(timer)
   }, [isTyping, typedCount, subtext.length, phase])
 
-  // Phase 5 → 6: delay for highlight sweep before showing CTA
+  // Phase 6 → 7: delay for highlight sweep before showing CTA
   useEffect(() => {
-    if (phase === 5) {
-      const timer = setTimeout(() => setPhase(6), 600)
+    if (phase === 6) {
+      const timer = setTimeout(() => setPhase(7), 600)
       return () => clearTimeout(timer)
     }
   }, [phase])
@@ -168,16 +182,30 @@ export function Hero({ brandName, tagline, subtext, ctaLabel }: HeroProps) {
 
   return (
     <header className={styles.hero}>
-      {/* Brand — outside notepad, centered */}
-      <p className={`${styles.brand} ${
-        phase >= 2 ? styles.brandVisible : phase >= 1 ? styles.brandSplash : ''
-      }`}>
-        <MonsteraIcon className={styles.brandIcon} />
-        {brandName}
-      </p>
+      {/* Top bar — brand left, book-a-call right */}
+      <div className={styles.topBar}>
+        <p
+          ref={brandRef}
+          className={`${styles.brand} ${
+            phase >= 3 ? styles.brandVisible : phase >= 1 ? styles.brandSplash : ''
+          }`}
+          style={{
+            '--splash-x': `${splashOffset.x}px`,
+            '--splash-y': `${splashOffset.y}px`,
+          } as React.CSSProperties}
+        >
+          <MonsteraIcon className={`${styles.brandIcon} ${phase >= 1 && phase < 3 ? styles.brandIconGlow : ''}`} />
+          <span className={`${styles.brandText} ${phase >= 2 ? styles.brandTextVisible : ''}`}>
+            {brandName}
+          </span>
+        </p>
+        {/* <a href="#book-a-call" className={`${styles.bookCallBtn} ${phase >= 4 ? styles.fadeIn : ''}`}>
+          Book a call
+        </a> */}
+      </div>
 
-      <div className={`${styles.notepad} ${phase >= 3 ? styles.notepadVisible : ''}`}>
-        <div className={`${styles.contentArea} ${phase >= 3 ? styles.contentVisible : ''}`}>
+      <div className={`${styles.notepad} ${phase >= 4 ? styles.notepadVisible : ''}`}>
+        <div className={`${styles.contentArea} ${phase >= 4 ? styles.contentVisible : ''}`}>
           <div className={styles.floatingIcons}>
             {icons.map((icon, i) => (
               <img
@@ -195,7 +223,7 @@ export function Hero({ brandName, tagline, subtext, ctaLabel }: HeroProps) {
                 key={index}
                 className={`${styles.word} ${highlightedIndices.has(index) ? styles.highlightedWord : ''}`}
                 style={
-                  phase >= 3
+                  phase >= 4
                     ? { animationDelay: `${index * 0.15}s` }
                     : undefined
                 }
@@ -207,17 +235,17 @@ export function Hero({ brandName, tagline, subtext, ctaLabel }: HeroProps) {
         </div>
 
         <button
-          className={`${styles.earlyAccessBtn} ${phase >= 3 ? styles.fadeIn : ''}`}
+          className={`${styles.earlyAccessBtn} ${phase >= 4 ? styles.fadeIn : ''}`}
           onClick={handleScrollClick}
         >
           Sign up for early access
         </button>
 
         {/* Subtext quote — friendly note from the team */}
-        <blockquote className={`${styles.subtext} ${phase >= 4 ? styles.fadeIn : ''}`}>
+        <blockquote className={`${styles.subtext} ${phase >= 5 ? styles.fadeIn : ''}`}>
           <p>
-            {renderTypedSegments(subtext, typedCount, highlightRanges, phase >= 5)}
-            {phase >= 4 && typedCount < subtext.length && (
+            {renderTypedSegments(subtext, typedCount, highlightRanges, phase >= 6)}
+            {phase >= 5 && typedCount < subtext.length && (
               <span className={styles.cursor}>|</span>
             )}
           </p>
@@ -226,7 +254,7 @@ export function Hero({ brandName, tagline, subtext, ctaLabel }: HeroProps) {
           )}
         </blockquote>
 
-        <div onClick={handleScrollClick} className={`${styles.navBar} ${phase >= 6 ? styles.fadeIn : ''}`}>
+        <div onClick={handleScrollClick} className={`${styles.navBar} ${phase >= 7 ? styles.fadeIn : ''}`}>
           <div className={styles.navTeaser}>
             <span className={styles.betaBadge}>Beta</span>
             <span className={styles.navLabel}>{ctaLabel}</span>
