@@ -1,0 +1,120 @@
+:root {
+  /* Colors */
+  --color-green-900: #1f3a27;
+  --color-green-800: #2B3D2B;
+  --color-green-accent: #4A7A4A;
+  --color-green-highlight: #cff851;
+  --color-cream-100: #F5F0E8;
+  --color-cream-200: #E8E0D0;
+  --color-white: #FFFFFF;
+
+  /* Typography */
+  --font-serif: 'Jost', sans-serif;
+  --font-serif-text: 'Jost', sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --fs-hero-title: clamp(3rem, 8vw, 8rem);
+  --fs-hero-brand: clamp(1.5rem, 3vw, 2.5rem);
+  --fs-hero-tagline: clamp(1.75rem, 4vw, 3.5rem);
+  --fs-section-title: clamp(2rem, 5vw, 5rem);
+  --fs-timeline-year: clamp(3rem, 8vw, 7rem);
+  --fs-body-large: clamp(1rem, 1.5vw, 1.25rem);
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+  --fs-caption: 0.75rem;
+
+  --lh-tight: 1.1;
+  --lh-normal: 1.5;
+  --lh-relaxed: 1.7;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-xxl: 3rem;
+  --space-xxxl: 4rem;
+  --space-section: 6rem;
+
+  /* Breakpoints (for reference, use in media queries) */
+  --bp-tablet: 768px;
+  --bp-desktop: 1024px;
+  --bp-wide: 1440px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--color-cream-100);
+  background-color: var(--color-green-900);
+  min-height: 100vh;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='10' cy='10' r='8' fill='%23cff851'/%3E%3C/svg%3E") 10 10, auto;
+}
+
+a, button, [role="button"] {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='10' cy='10' r='8' fill='%23cff851'/%3E%3C/svg%3E") 10 10, pointer;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-cream-100);
+  outline-offset: 2px;
+}
+
+::selection {
+  background-color: #cff851;
+  color: #2B3D2B;
+}
+
+::-moz-selection {
+  background-color: #cff851;
+  color: #2B3D2B;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

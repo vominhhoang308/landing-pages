@@ -1,0 +1,58 @@
+.indicator {
+  width: 56px;
+  height: 56px;
+  border: 1.5px solid var(--color-green-accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: transparent;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.indicator:hover {
+  transform: scale(1.1);
+}
+
+.indicator:focus-visible {
+  outline: 2px solid var(--color-green-accent);
+  outline-offset: 4px;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  animation: rotate 8s linear infinite;
+}
+
+.icon line {
+  stroke: var(--color-green-accent);
+  stroke-width: 1.5;
+}
+
+.icon circle {
+  stroke: var(--color-green-accent);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon {
+    animation: none;
+  }
+
+  .indicator {
+    transition: none;
+  }
+}

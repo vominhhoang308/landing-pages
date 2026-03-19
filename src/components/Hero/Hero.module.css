@@ -1,0 +1,344 @@
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: var(--space-xxl);
+  background-color: var(--color-green-900);
+  overflow: hidden;
+  padding: var(--space-xl);
+  gap: var(--space-xl);
+}
+
+/* Brand — large, bold, centered, lime highlight */
+.brand {
+  font-family: var(--font-serif);
+  font-size: var(--fs-hero-brand);
+  font-weight: 700;
+  color: var(--color-green-highlight, #cff851);
+  letter-spacing: 0.05em;
+  margin: 0;
+  text-align: center;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(40vh) scale(2.5);
+  transition: opacity 0.6s ease-in-out, transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3em;
+}
+
+.brandIcon {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}
+
+.brandSplash {
+  opacity: 1;
+  transform: translateY(40vh) scale(2.5);
+}
+
+.brandVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Notepad backdrop — cream paper surface */
+.notepad {
+  width: 100%;
+  max-width: 1400px;
+  background-color: rgb(214, 211, 203);
+  border-radius: 8px;
+  padding: var(--space-xxl) var(--space-xxl);
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.notepadVisible {
+  opacity: 1;
+}
+
+/* Content area — single centered column with floating icons */
+.contentArea {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.contentVisible {
+  opacity: 1;
+}
+
+/* Floating icons container */
+.floatingIcons {
+  position: absolute;
+  inset: -40px;
+  z-index: 0;
+  pointer-events: none;
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+@keyframes iconFloat {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-12px); }
+}
+
+.floatingIcon {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  opacity: 0.7;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+  animation: iconFloat 4s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+/* Tagline — centered, above icons */
+.tagline {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-serif);
+  font-size: var(--fs-hero-tagline);
+  color: var(--color-green-900);
+  line-height: var(--lh-tight);
+  font-weight: 400;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.word {
+  display: inline-block;
+  margin-right: 0.25em;
+  opacity: 0;
+}
+
+.contentVisible .word {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.highlightedWord {
+  background-color: #cff851;
+  color: var(--color-green-900);
+  padding: 0.05em 0.15em;
+  border-radius: 3px;
+}
+
+/* Subtext — handwritten note style */
+.subtext {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-serif);
+  font-size: var(--fs-body-large);
+  font-style: italic;
+  color: var(--color-green-900);
+  line-height: var(--lh-relaxed);
+  text-align: left;
+  margin-top: var(--space-xxxl);
+  width: 100%;
+  padding: 0;
+  border: none;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.subtextAttribution {
+  display: block;
+  font-style: normal;
+  font-weight: 600;
+  margin-top: var(--space-sm);
+  font-size: var(--fs-body);
+  color: var(--color-green-900);
+}
+
+/* Nav bar — horizontal, inside notepad */
+.navBar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1.5px solid var(--color-green-accent);
+  border-radius: 8px;
+  padding: var(--space-md) var(--space-xl);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.navTeaser {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.betaBadge {
+  display: inline-block;
+  background: var(--color-green-highlight);
+  color: var(--color-green-900);
+  font-family: var(--font-sans);
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.15em 0.6em;
+  border-radius: 999px;
+  line-height: 1.4;
+}
+
+.navLabel {
+  font-family: var(--font-serif);
+  font-size: var(--fs-body);
+  color: var(--color-green-900);
+  letter-spacing: 0.1em;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor {
+  animation: blink 0.7s step-end infinite;
+  font-style: normal;
+  font-weight: 300;
+}
+
+.subtextHighlight {
+  background-size: 200% 100%;
+  background-image: linear-gradient(to right, transparent 50%, #cff851 50%);
+  background-position: 100% 0;
+  transition: background-position 0.5s ease-out;
+  border-radius: 2px;
+  padding: 0.05em 0.1em;
+  color: var(--color-green-900);
+}
+
+.subtextHighlightActive {
+  background-position: 0 0;
+}
+
+.earlyAccessBtn {
+  margin-top: var(--space-lg);
+  padding: var(--space-sm) var(--space-xl);
+  background: var(--color-green-highlight);
+  color: var(--color-green-900);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0;
+  transition: background-color 0.2s ease 0s, opacity 0.8s ease-in-out 1.5s;
+  align-self: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.earlyAccessBtn:hover {
+  background: #b8e040;
+}
+
+/* Shine sweep pseudo-element — diagonal white highlight */
+.earlyAccessBtn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0) 60%,
+    transparent 80%
+  );
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Activate after button fades in */
+.earlyAccessBtn.fadeIn::after {
+  animation: shineSweep 4s ease-in-out 2.3s infinite;
+}
+
+/* Pulsing glow around button */
+.earlyAccessBtn.fadeIn {
+  animation: blingGlow 1.5s ease-in-out 2.3s infinite;
+}
+
+@keyframes shineSweep {
+  0%, 100% { left: -60%; opacity: 0; }
+  5% { opacity: 1; }
+  15% { left: 120%; opacity: 1; }
+  20%, 100% { opacity: 0; }
+}
+
+@keyframes blingGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(207, 248, 81, 0); }
+  50% { box-shadow: 0 0 32px 8px rgba(207, 248, 81, 0.55); }
+}
+
+.fadeIn {
+  opacity: 1;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .hero {
+    padding: var(--space-lg);
+    gap: var(--space-lg);
+  }
+
+  .notepad {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .floatingIcon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .navBar {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .navLabel {
+    font-size: var(--fs-caption);
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .navLabel {
+    font-size: var(--fs-caption);
+  }
+}
