@@ -1,6 +1,6 @@
 .indicator {
-  width: 56px;
-  height: 56px;
+  width: 58px;
+  height: 58px;
   border: 1.5px solid var(--color-green-accent);
   border-radius: 50%;
   display: flex;
@@ -22,8 +22,8 @@
 }
 
 .icon {
-  width: 20px;
-  height: 20px;
+  width: 21px;
+  height: 21px;
   animation: rotate 8s linear infinite;
 }
 

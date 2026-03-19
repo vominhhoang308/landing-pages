@@ -16,7 +16,7 @@
 /* Top bar — brand left, book-a-call right */
 .topBar {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1456px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -89,8 +89,8 @@
 }
 
 .brandIcon {
-  width: 1.2em;
-  height: 1.2em;
+  width: 1.248em;
+  height: 1.248em;
   flex-shrink: 0;
   background: var(--color-green-900, #0a2a1b);
   border-radius: 50%;
@@ -114,7 +114,7 @@
 }
 
 .brandTextVisible {
-  max-width: 20em;
+  max-width: 20.8em;
   margin-left: 0.3em;
 }
 
@@ -132,7 +132,7 @@
 /* Notepad backdrop — cream paper surface */
 .notepad {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1456px;
   background-color: rgb(214, 211, 203);
   border-radius: 8px;
   padding: var(--space-xxl) var(--space-xxl);
@@ -140,6 +140,8 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: var(--space-md);
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
@@ -170,7 +172,7 @@
   inset: -40px;
   z-index: 0;
   pointer-events: none;
-  max-width: 950px;
+  max-width: 988px;
   margin: 0 auto;
 }
 
@@ -181,8 +183,8 @@
 
 .floatingIcon {
   position: absolute;
-  width: 72px;
-  height: 72px;
+  width: 75px;
+  height: 75px;
   opacity: 0.7;
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
   animation: iconFloat 4s ease-in-out infinite alternate;
@@ -199,7 +201,7 @@
   line-height: var(--lh-tight);
   font-weight: 400;
   text-align: center;
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -249,6 +251,22 @@
   transition: opacity 0.8s ease-in-out;
 }
 
+.subtextWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.subtextSpacer {
+  visibility: hidden;
+}
+
+.subtextTyped {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
 .subtextAttribution {
   display: block;
   font-style: normal;
@@ -256,6 +274,12 @@
   margin-top: var(--space-sm);
   font-size: var(--fs-body);
   color: var(--color-green-900);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.citeFadeIn {
+  opacity: 1;
 }
 
 /* Nav bar — horizontal, inside notepad */
@@ -404,8 +428,8 @@
   }
 
   .floatingIcon {
-    width: 48px;
-    height: 48px;
+    width: 50px;
+    height: 50px;
   }
 
   .navBar {

@@ -13,16 +13,16 @@ interface HeroProps {
 const icons = [
   // ChatGPT — pair
   { src: '/floatingicon/vecteezy_chatgpt-icon-green-and-white-icon_42165837.png', alt: 'ChatGPT', position: { top: '5%', left: '5%' } },
-  { src: '/floatingicon/vecteezy_chatgpt-icon-green-and-white-icon_42165837.png', alt: 'ChatGPT', position: { bottom: '20%', right: '15%' } },
+  { src: '/floatingicon/vecteezy_chatgpt-icon-green-and-white-icon_42165837.png', alt: 'ChatGPT', position: { bottom: '15%', right: '15%' } },
   // Gemini — pair
   { src: '/floatingicon/vecteezy_gemini-ai-app-icon-with-transparent-background_56850690.png', alt: 'Gemini', position: { top: '10%', right: '8%' } },
-  { src: '/floatingicon/vecteezy_gemini-ai-app-icon-with-transparent-background_56850690.png', alt: 'Gemini', position: { bottom: '5%', left: '25%' } },
+  { src: '/floatingicon/vecteezy_gemini-ai-app-icon-with-transparent-background_56850690.png', alt: 'Gemini', position: { bottom: '5%', left: '15%' } },
   // Perplexity — pair
   { src: '/floatingicon/vecteezy_perplexity-ai-transparent-logo_51336393.png', alt: 'Perplexity', position: { bottom: '15%', left: '10%' } },
-  { src: '/floatingicon/vecteezy_perplexity-ai-transparent-logo_51336393.png', alt: 'Perplexity', position: { top: '20%', right: '15%' } },
+  { src: '/floatingicon/vecteezy_perplexity-ai-transparent-logo_51336393.png', alt: 'Perplexity', position: { top: '15%', right: '15%' } },
   // Claude — pair
   { src: '/floatingicon/vecteezy_claude-ai-icon-on-a-transparent-background_78109960.png', alt: 'Claude', position: { bottom: '10%', right: '5%' } },
-  { src: '/floatingicon/vecteezy_claude-ai-icon-on-a-transparent-background_78109960.png', alt: 'Claude', position: { top: '15%', left: '15%' } },
+  { src: '/floatingicon/vecteezy_claude-ai-icon-on-a-transparent-background_78109960.png', alt: 'Claude', position: { top: '15%', left: '10%' } },
   // Copilot — pair
   { src: '/floatingicon/vecteezy_microsoft-copilot-icon-on-transparent-background_58072400.png', alt: 'Copilot', position: { top: '50%', left: '0%' } },
   { src: '/floatingicon/vecteezy_microsoft-copilot-icon-on-transparent-background_58072400.png', alt: 'Copilot', position: { top: '35%', right: '2%' } },
@@ -243,15 +243,20 @@ export function Hero({ brandName, tagline, subtext, ctaLabel }: HeroProps) {
 
         {/* Subtext quote — friendly note from the team */}
         <blockquote className={`${styles.subtext} ${phase >= 5 ? styles.fadeIn : ''}`}>
-          <p>
-            {renderTypedSegments(subtext, typedCount, highlightRanges, phase >= 6)}
-            {phase >= 5 && typedCount < subtext.length && (
-              <span className={styles.cursor}>|</span>
-            )}
-          </p>
-          {typedCount >= subtext.length && (
-            <cite className={styles.subtextAttribution}>— The Asgar Team</cite>
-          )}
+          <div className={styles.subtextWrapper}>
+            {/* Invisible full text — reserves final height */}
+            <p className={styles.subtextSpacer}>{subtext}</p>
+            {/* Typed text overlaid on top */}
+            <p className={styles.subtextTyped}>
+              {renderTypedSegments(subtext, typedCount, highlightRanges, phase >= 6)}
+              {phase >= 5 && typedCount < subtext.length && (
+                <span className={styles.cursor}>|</span>
+              )}
+            </p>
+          </div>
+          <cite className={`${styles.subtextAttribution} ${typedCount >= subtext.length ? styles.citeFadeIn : ''}`}>
+            — The Asgar Team
+          </cite>
         </blockquote>
 
         <div onClick={handleScrollClick} className={`${styles.navBar} ${phase >= 7 ? styles.fadeIn : ''}`}>

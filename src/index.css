@@ -13,15 +13,15 @@
   --font-serif-text: 'Jost', sans-serif;
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  --fs-hero-title: clamp(3rem, 8vw, 8rem);
-  --fs-hero-brand: clamp(1.5rem, 3vw, 2.5rem);
-  --fs-hero-tagline: clamp(1.75rem, 4vw, 3.5rem);
-  --fs-section-title: clamp(2rem, 5vw, 5rem);
-  --fs-timeline-year: clamp(3rem, 8vw, 7rem);
-  --fs-body-large: clamp(1rem, 1.5vw, 1.25rem);
-  --fs-body: 1rem;
-  --fs-small: 0.875rem;
-  --fs-caption: 0.75rem;
+  --fs-hero-title: clamp(4.056rem, 10.816vw, 10.816rem);
+  --fs-hero-brand: clamp(2.028rem, 4.056vw, 3.38rem);
+  --fs-hero-tagline: clamp(2.366rem, 5.408vw, 4.732rem);
+  --fs-section-title: clamp(2.704rem, 6.76vw, 6.76rem);
+  --fs-timeline-year: clamp(4.056rem, 10.816vw, 9.464rem);
+  --fs-body-large: clamp(1.352rem, 2.028vw, 1.69rem);
+  --fs-body: 1.352rem;
+  --fs-small: 1.183rem;
+  --fs-caption: 1.014rem;
 
   --lh-tight: 1.1;
   --lh-normal: 1.5;
