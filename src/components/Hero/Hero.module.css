@@ -36,6 +36,7 @@
   gap: 0;
   opacity: 0;
   transition: opacity 1.0s ease-in-out;
+  transform-origin: 0.624em center;
 }
 
 /* Book a call button */
@@ -120,7 +121,7 @@
 
 .brandSplash {
   opacity: 1;
-  transform: translate(var(--splash-x, 0), var(--splash-y, 0)) scale(2.5);
+  transform: translate(var(--splash-x, 0), var(--splash-y, 0)) scale(var(--splash-scale, 2.5));
 }
 
 .brandVisible {
@@ -444,6 +445,7 @@
     padding: var(--space-xs) var(--space-md);
     font-size: var(--fs-caption);
   }
+
 }
 
 /* Tablet */

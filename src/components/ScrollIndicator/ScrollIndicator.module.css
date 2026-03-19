@@ -46,13 +46,3 @@
     transform: rotate(360deg);
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .icon {
-    animation: none;
-  }
-
-  .indicator {
-    transition: none;
-  }
-}

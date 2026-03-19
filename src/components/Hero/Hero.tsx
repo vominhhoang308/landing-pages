@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import MonsteraIcon from '../MonsteraIcon/MonsteraIcon'
 import { ScrollIndicator } from '../ScrollIndicator/ScrollIndicator'
 import styles from './Hero.module.css'
@@ -78,29 +78,63 @@ export function Hero({ brandName, tagline, subtext, ctaLabel }: HeroProps) {
   const [typedCount, setTypedCount] = useState(0)
   const isTyping = phase >= 5
   const brandRef = useRef<HTMLParagraphElement>(null)
-  const [splashOffset, setSplashOffset] = useState({ x: 0, y: 0 })
+  const [splashOffset, setSplashOffset] = useState({ iconX: 0, y: 0, scale: 2.5 })
+  const [ready, setReady] = useState(false)
 
-  useLayoutEffect(() => {
-    if (brandRef.current) {
-      const rect = brandRef.current.getBoundingClientRect()
-      setSplashOffset({
-        x: window.innerWidth / 2 - (rect.left + rect.width / 2),
-        y: window.innerHeight / 2 - (rect.top + rect.height / 2),
-      })
+  useEffect(() => {
+    const measure = () => {
+      const brandEl = brandRef.current
+      if (!brandEl) return
+
+      // 1. Measure icon-only width
+      const iconRect = brandEl.getBoundingClientRect()
+
+      // Read the actual CSS transform-origin in pixels (resolves 0.624em → px)
+      const originStr = getComputedStyle(brandEl).transformOrigin
+      const originParts = originStr.split(' ')
+      const originX = parseFloat(originParts[0])
+      const originY = parseFloat(originParts[1])
+
+      // Center the transform-origin point at viewport center
+      const iconX = window.innerWidth / 2 - (iconRect.left + originX + 50)
+      const y = window.innerHeight / 2 - (iconRect.top + originY)
+
+      // 2. Temporarily reveal text to measure full brand
+      const textSpan = brandEl.querySelector(`.${styles.brandText}`) as HTMLElement
+      if (textSpan) {
+        textSpan.style.transition = 'none'
+        textSpan.style.maxWidth = '20.8em'
+        textSpan.style.marginLeft = '0.3em'
+      }
+      const fullRect = brandEl.getBoundingClientRect()
+      if (textSpan) {
+        textSpan.style.maxWidth = ''
+        textSpan.style.marginLeft = ''
+        void brandEl.offsetWidth          // flush reset while transition is still disabled
+        textSpan.style.transition = ''    // restore transition for the reveal animation
+      }
+
+      // 3. Safe scale — with icon centered, text extends right from viewport center
+      const isMobile = window.matchMedia('(max-width: 767px)').matches
+      const desiredScale = isMobile ? 1.6 : 2.5
+      const rightExtent = fullRect.width - originX
+      const leftExtent = originX
+      const pad = 16  // px breathing room on each side
+      const maxFromRight = (window.innerWidth / 2 - pad) / rightExtent
+      const maxFromLeft = (window.innerWidth / 2 - pad) / leftExtent
+      const maxScale = Math.min(maxFromRight, maxFromLeft)
+      const scale = Math.min(desiredScale, maxScale)
+
+      setSplashOffset({ iconX, y, scale })
+      setReady(true)
     }
+
+    // Wait for fonts to load before measuring
+    document.fonts.ready.then(measure)
   }, [])
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches
-
-    if (prefersReducedMotion) {
-      setPhase(7)
-      setTypedCount(subtext.length)
-      return
-    }
-
+    if (!ready) return
     const t1 = setTimeout(() => setPhase(1), 50)
     const t2 = setTimeout(() => setPhase(2), 550)
     const t3 = setTimeout(() => setPhase(3), 1800)
@@ -114,7 +148,7 @@ export function Hero({ brandName, tagline, subtext, ctaLabel }: HeroProps) {
       clearTimeout(t4)
       clearTimeout(t5)
     }
-  }, [subtext.length])
+  }, [ready, subtext.length])
 
   useEffect(() => {
     if (!isTyping || typedCount >= subtext.length) {
@@ -190,8 +224,9 @@ export function Hero({ brandName, tagline, subtext, ctaLabel }: HeroProps) {
             phase >= 3 ? styles.brandVisible : phase >= 1 ? styles.brandSplash : ''
           }`}
           style={{
-            '--splash-x': `${splashOffset.x}px`,
+            '--splash-x': `${splashOffset.iconX}px`,
             '--splash-y': `${splashOffset.y}px`,
+            '--splash-scale': splashOffset.scale,
           } as React.CSSProperties}
         >
           <MonsteraIcon className={`${styles.brandIcon} ${phase >= 1 && phase < 3 ? styles.brandIconGlow : ''}`} />
