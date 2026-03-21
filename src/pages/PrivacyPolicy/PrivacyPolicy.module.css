@@ -1,0 +1,68 @@
+.main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-xxl) var(--space-xl);
+  color: var(--color-cream-100);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: var(--lh-tight);
+  margin-bottom: var(--space-sm);
+}
+
+.lastUpdated {
+  font-size: var(--fs-small);
+  color: var(--color-cream-200);
+  margin-bottom: var(--space-xxl);
+}
+
+.section {
+  margin-bottom: var(--space-xxl);
+}
+
+.sectionTitle {
+  font-family: var(--font-serif);
+  font-size: var(--fs-body-large);
+  line-height: var(--lh-tight);
+  margin-bottom: var(--space-md);
+}
+
+.section p {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-relaxed);
+  color: var(--color-cream-200);
+  margin-bottom: var(--space-md);
+}
+
+.section ul {
+  list-style: disc;
+  padding-left: var(--space-xl);
+  margin-bottom: var(--space-md);
+}
+
+.section li {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-relaxed);
+  color: var(--color-cream-200);
+  margin-bottom: var(--space-sm);
+}
+
+.contactLink {
+  color: var(--color-green-highlight);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.contactLink:hover {
+  color: var(--color-cream-100);
+}
+
+@media (max-width: 767px) {
+  .main {
+    padding: var(--space-xl) var(--space-lg);
+  }
+}

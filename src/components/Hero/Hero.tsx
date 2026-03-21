@@ -13,13 +13,13 @@ interface HeroProps {
 const icons = [
   // ChatGPT — pair
   { src: '/floatingicon/vecteezy_chatgpt-icon-green-and-white-icon_42165837.png', alt: 'ChatGPT', position: { top: '5%', left: '5%' } },
-  { src: '/floatingicon/vecteezy_chatgpt-icon-green-and-white-icon_42165837.png', alt: 'ChatGPT', position: { bottom: '15%', right: '15%' } },
+  { src: '/floatingicon/vecteezy_chatgpt-icon-green-and-white-icon_42165837.png', alt: 'ChatGPT', position: { bottom: '0%', right: '15%' } },
   // Gemini — pair
   { src: '/floatingicon/vecteezy_gemini-ai-app-icon-with-transparent-background_56850690.png', alt: 'Gemini', position: { top: '10%', right: '8%' } },
   { src: '/floatingicon/vecteezy_gemini-ai-app-icon-with-transparent-background_56850690.png', alt: 'Gemini', position: { bottom: '5%', left: '15%' } },
   // Perplexity — pair
-  { src: '/floatingicon/vecteezy_perplexity-ai-transparent-logo_51336393.png', alt: 'Perplexity', position: { bottom: '15%', left: '10%' } },
-  { src: '/floatingicon/vecteezy_perplexity-ai-transparent-logo_51336393.png', alt: 'Perplexity', position: { top: '15%', right: '15%' } },
+  { src: '/floatingicon/vecteezy_perplexity-ai-transparent-logo_51336393.png', alt: 'Perplexity', position: { bottom: '0%', left: '5%' } },
+  { src: '/floatingicon/vecteezy_perplexity-ai-transparent-logo_51336393.png', alt: 'Perplexity', position: { top: '5%', right: '15%' } },
   // Claude — pair
   { src: '/floatingicon/vecteezy_claude-ai-icon-on-a-transparent-background_78109960.png', alt: 'Claude', position: { bottom: '10%', right: '5%' } },
   { src: '/floatingicon/vecteezy_claude-ai-icon-on-a-transparent-background_78109960.png', alt: 'Claude', position: { top: '15%', left: '10%' } },
@@ -91,12 +91,12 @@ export function Hero({ brandName, tagline, subtext, ctaLabel }: HeroProps) {
 
       // Read the actual CSS transform-origin in pixels (resolves 0.624em → px)
       const originStr = getComputedStyle(brandEl).transformOrigin
-      const [ox = '0', oy = '0'] = originStr.split(' ')
-      const originX = parseFloat(ox)
-      const originY = parseFloat(oy)
+      const originParts = originStr.split(' ')
+      const originX = parseFloat(originParts[0])
+      const originY = parseFloat(originParts[1])
 
       // Center the transform-origin point at viewport center
-      const iconX = window.innerWidth / 2 - (iconRect.left + originX + 50)
+      const iconX = window.innerWidth / 2 - (iconRect.left + originX + 100)
       const y = window.innerHeight / 2 - (iconRect.top + originY)
 
       // 2. Temporarily reveal text to measure full brand

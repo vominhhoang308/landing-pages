@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import type { FooterLink } from '../../data/footerLinks'
 import styles from './Footer.module.css'
 
@@ -17,18 +18,23 @@ export function Footer({ copyrightHolder, copyrightYear, links, creditText }: Fo
         </p>
 
         <nav className={styles.links} aria-label="Footer navigation">
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={styles.link}
-              {...(link.isExternal
-                ? { target: '_blank', rel: 'noopener noreferrer' }
-                : {})}
-            >
-              {link.label}
-            </a>
-          ))}
+          {links.map((link) =>
+            link.isExternal ? (
+              <a
+                key={link.href}
+                href={link.href}
+                className={styles.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link key={link.href} to={link.href} className={styles.link}>
+                {link.label}
+              </Link>
+            ),
+          )}
         </nav>
 
         <p className={styles.credit}>{creditText}</p>

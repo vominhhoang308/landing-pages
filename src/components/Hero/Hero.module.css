@@ -170,10 +170,10 @@
 /* Floating icons container */
 .floatingIcons {
   position: absolute;
-  inset: -40px;
+  inset: -60px;
   z-index: 0;
   pointer-events: none;
-  max-width: 988px;
+  max-width: 95%;
   margin: 0 auto;
 }
 
@@ -184,8 +184,8 @@
 
 .floatingIcon {
   position: absolute;
-  width: 75px;
-  height: 75px;
+  width: 120px;
+  height: 120px;
   opacity: 0.7;
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
   animation: iconFloat 4s ease-in-out infinite alternate;

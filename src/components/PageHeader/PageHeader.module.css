@@ -1,0 +1,33 @@
+.header {
+  width: 100%;
+  padding: var(--space-lg) var(--space-xl);
+}
+
+.container {
+  max-width: 1498px;
+  margin: 0 auto;
+}
+
+.homeLink {
+  font-family: var(--font-serif);
+  font-size: var(--fs-body-large);
+  color: var(--color-cream-100);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.homeLink:hover {
+  color: var(--color-cream-200);
+}
+
+@media (max-width: 767px) {
+  .header {
+    padding: var(--space-lg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .homeLink {
+    transition: none;
+  }
+}
