@@ -92,8 +92,8 @@ export function Hero({ brandName, tagline, subtext, ctaLabel }: HeroProps) {
       // Read the actual CSS transform-origin in pixels (resolves 0.624em → px)
       const originStr = getComputedStyle(brandEl).transformOrigin
       const originParts = originStr.split(' ')
-      const originX = parseFloat(originParts[0])
-      const originY = parseFloat(originParts[1])
+      const originX = parseFloat(originParts[0] ?? '0')
+      const originY = parseFloat(originParts[1] ?? '0')
 
       // Center the transform-origin point at viewport center
       const iconX = window.innerWidth / 2 - (iconRect.left + originX + 100)
