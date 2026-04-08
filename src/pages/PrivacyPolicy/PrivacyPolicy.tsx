@@ -1,11 +1,18 @@
 import { PageHeader } from '../../components/PageHeader/PageHeader'
 import { Footer } from '../../components/Footer/Footer'
+import { Seo } from '../../components/Seo/Seo'
 import { footerLinks } from '../../data/footerLinks'
 import styles from './PrivacyPolicy.module.css'
 
 export function PrivacyPolicy() {
   return (
     <>
+      <Seo
+        title="Privacy Policy: Asgar.ai"
+        description="Privacy Policy for Asgar.ai: how we collect, use, and protect your information when you visit asgar.ai or use our SEO/GEO/AEO/AIO agency services."
+        canonical="https://asgar.ai/privacy"
+        robots="noindex,follow"
+      />
       <PageHeader />
       <main className={styles.main}>
         <h1 className={styles.title}>Privacy Policy</h1>
@@ -15,10 +22,10 @@ export function PrivacyPolicy() {
           <h2 className={styles.sectionTitle}>1. Introduction</h2>
           <p>
             Asgar.ai (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) operates the
-            asgar.ai website and provides AI Visibility and Generative Engine
-            Optimization (GEO) services. This Privacy Policy explains how we
-            collect, use, disclose, and safeguard your information when you visit
-            our website or use our services.
+            asgar.ai website and provides SEO, GEO, AEO, and AIO agency
+            services. This Privacy Policy explains how we collect, use, disclose,
+            and safeguard your information when you visit our website or use our
+            agency services.
           </p>
           <p>
             By accessing or using our website, you agree to the terms of this
@@ -32,7 +39,7 @@ export function PrivacyPolicy() {
           <ul>
             <li>
               <strong>Contact information:</strong> Email address provided when
-              signing up for early access or downloading our GEO Strategy Guide.
+              subscribing to updates or downloading our SEO/GEO/AEO/AIO Strategy Guide.
             </li>
             <li>
               <strong>Company information:</strong> Company name or role, if
@@ -57,10 +64,10 @@ export function PrivacyPolicy() {
           <h2 className={styles.sectionTitle}>3. How We Use Your Information</h2>
           <p>We use the information we collect to:</p>
           <ul>
-            <li>Provide and manage early access to our platform.</li>
-            <li>Deliver the GEO Strategy Guide and related resources.</li>
+            <li>Provide updates on our agency services and industry insights.</li>
+            <li>Deliver the SEO/GEO/AEO/AIO Strategy Guide and related resources.</li>
             <li>
-              Send product updates, feature announcements, and relevant
+              Send service updates, new offering announcements, and relevant
               communications (with your consent).
             </li>
             <li>Improve and optimize our website and services.</li>
@@ -79,8 +86,8 @@ export function PrivacyPolicy() {
           </p>
           <ul>
             <li>
-              <strong>Consent:</strong> When you sign up for early access or
-              subscribe to communications.
+              <strong>Consent:</strong> When you subscribe to communications or
+              request services.
             </li>
             <li>
               <strong>Legitimate interest:</strong> For analytics and improving
@@ -88,7 +95,7 @@ export function PrivacyPolicy() {
             </li>
             <li>
               <strong>Contract performance:</strong> To deliver services you have
-              requested, such as the GEO Strategy Guide.
+              requested, such as the SEO/GEO/AEO/AIO Strategy Guide.
             </li>
           </ul>
         </section>
@@ -107,7 +114,7 @@ export function PrivacyPolicy() {
             </li>
             <li>
               <strong>Email service providers:</strong> To deliver communications
-              and the GEO Strategy Guide.
+              and the SEO/GEO/AEO/AIO Strategy Guide.
             </li>
             <li>
               <strong>Analytics providers:</strong> To understand how our website
@@ -129,7 +136,7 @@ export function PrivacyPolicy() {
           </p>
           <ul>
             <li>
-              Early access signup data is retained for the duration of your
+              Newsletter and inquiry data is retained for the duration of your
               relationship with us.
             </li>
             <li>

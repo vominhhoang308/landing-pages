@@ -80,11 +80,12 @@ export function CtaSection({ backendUrl, pdfPath }: CtaSectionProps) {
     <section id="cta-section" ref={sectionRef} className={styles.section}>
       <div className={`${styles.container} ${isVisible ? styles.visible : ''}`}>
         <h2 className={styles.heading}>
-          Asgar.ai is in <span className={styles.headingHighlight}>Beta</span>
+          Plant your <span className={styles.headingHighlight}>visibility</span>
         </h2>
         <p className={styles.subheading}>
-          Get our free GEO Strategy Guide - a practical playbook to make your brand visible in AI
-          engines like ChatGPT, Gemini, and Perplexity.
+          Get our free SEO/GEO/AEO/AIO Strategy Guide - a practical playbook to make your brand
+          visible across search engines, generative AI engines, and answer engines like Google,
+          ChatGPT, Gemini, and Perplexity.
         </p>
 
         {status === 'success' ? (
@@ -115,7 +116,7 @@ export function CtaSection({ backendUrl, pdfPath }: CtaSectionProps) {
         {status === 'error' && <p className={styles.errorMessage}>{errorMessage}</p>}
 
         <p className={styles.finePrint}>
-          We'll also sign you up for early beta access. You can opt-out at any time!
+          We'll also send you occasional updates on our work. You can unsubscribe at any time.
         </p>
       </div>
     </section>

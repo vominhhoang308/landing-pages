@@ -10,6 +10,18 @@
   width: 100%;
 }
 
+.siteBody {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease-in-out;
+  padding-top: var(--topnav-height);
+}
+
+.siteBodyVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .skipLink {
   position: absolute;
   top: -100%;

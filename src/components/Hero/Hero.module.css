@@ -13,32 +13,6 @@
   gap: var(--space-xl);
 }
 
-/* Top bar — brand left, book-a-call right */
-.topBar {
-  width: 100%;
-  max-width: 1456px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 2;
-}
-
-/* Brand — large, bold, left-aligned, lime highlight */
-.brand {
-  font-family: var(--font-serif);
-  font-size: var(--fs-hero-brand);
-  font-weight: 700;
-  color: var(--color-green-highlight, #cff851);
-  letter-spacing: 0.05em;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 0;
-  opacity: 0;
-  transition: opacity 1.0s ease-in-out;
-  transform-origin: 0.624em center;
-}
-
 /* Book a call button */
 .bookCallBtn {
   padding: var(--space-sm) var(--space-xl);
@@ -89,48 +63,7 @@
   animation: blingGlow 3s ease-in-out 2.3s infinite;
 }
 
-.brandIcon {
-  width: 1.248em;
-  height: 1.248em;
-  flex-shrink: 0;
-  background: var(--color-green-900, #0a2a1b);
-  border-radius: 50%;
-  padding: 0.15em;
-  box-sizing: border-box;
-  transition: filter 0.4s ease-out;
-}
-
-.brandIconGlow {
-  filter: drop-shadow(0 0 12px rgba(207, 248, 81, 0.7))
-          drop-shadow(0 0 24px rgba(207, 248, 81, 0.4));
-}
-
-.brandText {
-  display: inline-block;
-  max-width: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  margin-left: 0;
-  transition: max-width 1.0s ease-out, margin-left 1.0s ease-out;
-}
-
-.brandTextVisible {
-  max-width: 20.8em;
-  margin-left: 0.3em;
-}
-
-.brandSplash {
-  opacity: 1;
-  transform: translate(var(--splash-x, 0), var(--splash-y, 0)) scale(var(--splash-scale, 2.5));
-}
-
-.brandVisible {
-  opacity: 1;
-  transform: translate(0, 0) scale(1);
-  transition: opacity 0.6s ease-in-out, transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Notepad backdrop — cream paper surface */
+/* Notepad backdrop: cream paper surface */
 .notepad {
   width: 100%;
   max-width: 1456px;
@@ -152,7 +85,7 @@
   opacity: 1;
 }
 
-/* Content area — single centered column with floating icons */
+/* Content area: single centered column with floating icons */
 .contentArea {
   position: relative;
   width: 100%;
@@ -192,7 +125,7 @@
   pointer-events: none;
 }
 
-/* Tagline — centered, above icons */
+/* Tagline: centered, above icons */
 .tagline {
   position: relative;
   z-index: 1;
@@ -234,7 +167,7 @@
   border-radius: 3px;
 }
 
-/* Subtext — handwritten note style */
+/* Subtext: handwritten note style */
 .subtext {
   position: relative;
   z-index: 1;
@@ -283,7 +216,7 @@
   opacity: 1;
 }
 
-/* Nav bar — horizontal, inside notepad */
+/* Nav bar: horizontal, inside notepad */
 .navBar {
   width: 100%;
   display: flex;
@@ -371,7 +304,7 @@
   background: #b8e040;
 }
 
-/* Shine sweep pseudo-element — diagonal white highlight */
+/* Shine sweep pseudo-element: diagonal white highlight */
 .earlyAccessBtn::after {
   content: '';
   position: absolute;

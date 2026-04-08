@@ -1,29 +1,28 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import MonsteraIcon from '../MonsteraIcon/MonsteraIcon'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { ScrollIndicator } from '../ScrollIndicator/ScrollIndicator'
+import { CALENDLY_URL } from '../../constants/links'
 import styles from './Hero.module.css'
 
 interface HeroProps {
-  brandName: string
   tagline: string
   subtext: string
   ctaLabel: string
 }
 
 const icons = [
-  // ChatGPT — pair
+  // ChatGPT pair
   { src: '/floatingicon/vecteezy_chatgpt-icon-green-and-white-icon_42165837.png', alt: 'ChatGPT', position: { top: '5%', left: '5%' } },
   { src: '/floatingicon/vecteezy_chatgpt-icon-green-and-white-icon_42165837.png', alt: 'ChatGPT', position: { bottom: '0%', right: '15%' } },
-  // Gemini — pair
+  // Gemini pair
   { src: '/floatingicon/vecteezy_gemini-ai-app-icon-with-transparent-background_56850690.png', alt: 'Gemini', position: { top: '10%', right: '8%' } },
   { src: '/floatingicon/vecteezy_gemini-ai-app-icon-with-transparent-background_56850690.png', alt: 'Gemini', position: { bottom: '5%', left: '15%' } },
-  // Perplexity — pair
+  // Perplexity pair
   { src: '/floatingicon/vecteezy_perplexity-ai-transparent-logo_51336393.png', alt: 'Perplexity', position: { bottom: '0%', left: '5%' } },
   { src: '/floatingicon/vecteezy_perplexity-ai-transparent-logo_51336393.png', alt: 'Perplexity', position: { top: '5%', right: '15%' } },
-  // Claude — pair
+  // Claude pair
   { src: '/floatingicon/vecteezy_claude-ai-icon-on-a-transparent-background_78109960.png', alt: 'Claude', position: { bottom: '10%', right: '5%' } },
   { src: '/floatingicon/vecteezy_claude-ai-icon-on-a-transparent-background_78109960.png', alt: 'Claude', position: { top: '15%', left: '10%' } },
-  // Copilot — pair
+  // Copilot pair
   { src: '/floatingicon/vecteezy_microsoft-copilot-icon-on-transparent-background_58072400.png', alt: 'Copilot', position: { top: '50%', left: '0%' } },
   { src: '/floatingicon/vecteezy_microsoft-copilot-icon-on-transparent-background_58072400.png', alt: 'Copilot', position: { top: '35%', right: '2%' } },
 ]
@@ -73,82 +72,20 @@ function renderTypedSegments(
   return segments
 }
 
-export function Hero({ brandName, tagline, subtext, ctaLabel }: HeroProps) {
-  const [phase, setPhase] = useState(0)
+export function Hero({ tagline, subtext, ctaLabel }: HeroProps) {
+  const [phase, setPhase] = useState(3)
   const [typedCount, setTypedCount] = useState(0)
   const isTyping = phase >= 5
-  const brandRef = useRef<HTMLParagraphElement>(null)
-  const [splashOffset, setSplashOffset] = useState({ iconX: 0, y: 0, scale: 2.5 })
-  const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    const measure = () => {
-      const brandEl = brandRef.current
-      if (!brandEl) return
-
-      // 1. Measure icon-only width
-      const iconRect = brandEl.getBoundingClientRect()
-
-      // Read the actual CSS transform-origin in pixels (resolves 0.624em → px)
-      const originStr = getComputedStyle(brandEl).transformOrigin
-      const originParts = originStr.split(' ')
-      const originX = parseFloat(originParts[0] ?? '0')
-      const originY = parseFloat(originParts[1] ?? '0')
-
-      // Center the transform-origin point at viewport center
-      const iconX = window.innerWidth / 2 - (iconRect.left + originX + 100)
-      const y = window.innerHeight / 2 - (iconRect.top + originY)
-
-      // 2. Temporarily reveal text to measure full brand
-      const textSpan = brandEl.querySelector(`.${styles.brandText}`) as HTMLElement
-      if (textSpan) {
-        textSpan.style.transition = 'none'
-        textSpan.style.maxWidth = '20.8em'
-        textSpan.style.marginLeft = '0.3em'
-      }
-      const fullRect = brandEl.getBoundingClientRect()
-      if (textSpan) {
-        textSpan.style.maxWidth = ''
-        textSpan.style.marginLeft = ''
-        void brandEl.offsetWidth          // flush reset while transition is still disabled
-        textSpan.style.transition = ''    // restore transition for the reveal animation
-      }
-
-      // 3. Safe scale — with icon centered, text extends right from viewport center
-      const isMobile = window.matchMedia('(max-width: 767px)').matches
-      const desiredScale = isMobile ? 1.6 : 2.5
-      const rightExtent = fullRect.width - originX
-      const leftExtent = originX
-      const pad = 16  // px breathing room on each side
-      const maxFromRight = (window.innerWidth / 2 - pad) / rightExtent
-      const maxFromLeft = (window.innerWidth / 2 - pad) / leftExtent
-      const maxScale = Math.min(maxFromRight, maxFromLeft)
-      const scale = Math.min(desiredScale, maxScale)
-
-      setSplashOffset({ iconX, y, scale })
-      setReady(true)
-    }
-
-    // Wait for fonts to load before measuring
-    document.fonts.ready.then(measure)
-  }, [])
-
-  useEffect(() => {
-    if (!ready) return
-    const t1 = setTimeout(() => setPhase(1), 50)
-    const t2 = setTimeout(() => setPhase(2), 550)
-    const t3 = setTimeout(() => setPhase(3), 1800)
-    const t4 = setTimeout(() => setPhase(4), 1800)
-    const t5 = setTimeout(() => setPhase(5), 3000)
+    const t4 = setTimeout(() => setPhase(4), 0)
+    const t5 = setTimeout(() => setPhase(5), 1200)
 
     return () => {
-      clearTimeout(t1)
-      clearTimeout(t2)
-      clearTimeout(t3)
       clearTimeout(t4)
       clearTimeout(t5)
     }
-  }, [ready, subtext.length])
+  }, [])
 
   useEffect(() => {
     if (!isTyping || typedCount >= subtext.length) {
@@ -162,7 +99,7 @@ export function Hero({ brandName, tagline, subtext, ctaLabel }: HeroProps) {
     return () => clearTimeout(timer)
   }, [isTyping, typedCount, subtext.length, phase])
 
-  // Phase 6 → 7: delay for highlight sweep before showing CTA
+  // Phase 6 -> 7: delay for highlight sweep before showing CTA
   useEffect(() => {
     if (phase === 6) {
       const timer = setTimeout(() => setPhase(7), 600)
@@ -216,29 +153,6 @@ export function Hero({ brandName, tagline, subtext, ctaLabel }: HeroProps) {
 
   return (
     <header className={styles.hero}>
-      {/* Top bar — brand left, book-a-call right */}
-      <div className={styles.topBar}>
-        <p
-          ref={brandRef}
-          className={`${styles.brand} ${
-            phase >= 3 ? styles.brandVisible : phase >= 1 ? styles.brandSplash : ''
-          }`}
-          style={{
-            '--splash-x': `${splashOffset.iconX}px`,
-            '--splash-y': `${splashOffset.y}px`,
-            '--splash-scale': splashOffset.scale,
-          } as React.CSSProperties}
-        >
-          <MonsteraIcon className={`${styles.brandIcon} ${phase >= 1 && phase < 3 ? styles.brandIconGlow : ''}`} />
-          <span className={`${styles.brandText} ${phase >= 2 ? styles.brandTextVisible : ''}`}>
-            {brandName}
-          </span>
-        </p>
-        {/* <a href="#book-a-call" className={`${styles.bookCallBtn} ${phase >= 4 ? styles.fadeIn : ''}`}>
-          Book a call
-        </a> */}
-      </div>
-
       <div className={`${styles.notepad} ${phase >= 4 ? styles.notepadVisible : ''}`}>
         <div className={`${styles.contentArea} ${phase >= 4 ? styles.contentVisible : ''}`}>
           <div className={styles.floatingIcons}>
@@ -269,17 +183,19 @@ export function Hero({ brandName, tagline, subtext, ctaLabel }: HeroProps) {
           </h1>
         </div>
 
-        <button
+        <a
           className={`${styles.earlyAccessBtn} ${phase >= 4 ? styles.fadeIn : ''}`}
-          onClick={handleScrollClick}
+          href={CALENDLY_URL}
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          Sign up for early access
-        </button>
+          Book audit
+        </a>
 
-        {/* Subtext quote — friendly note from the team */}
+        {/* Subtext quote: friendly note from the team */}
         <blockquote className={`${styles.subtext} ${phase >= 5 ? styles.fadeIn : ''}`}>
           <div className={styles.subtextWrapper}>
-            {/* Invisible full text — reserves final height */}
+            {/* Invisible full text reserves final height */}
             <p className={styles.subtextSpacer}>{subtext}</p>
             {/* Typed text overlaid on top */}
             <p className={styles.subtextTyped}>
@@ -290,7 +206,7 @@ export function Hero({ brandName, tagline, subtext, ctaLabel }: HeroProps) {
             </p>
           </div>
           <cite className={`${styles.subtextAttribution} ${typedCount >= subtext.length ? styles.citeFadeIn : ''}`}>
-            — The Asgar Team
+            The Asgar Team
           </cite>
         </blockquote>
 
