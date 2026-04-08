@@ -112,6 +112,30 @@
   vertical-align: top;
 }
 
+.priceRow {
+  background: rgba(201, 242, 75, 0.14);
+  border-top: 2px solid var(--color-green-highlight);
+  border-bottom: 2px solid var(--color-green-highlight);
+}
+
+.priceRow:hover {
+  background: rgba(201, 242, 75, 0.14);
+}
+
+.priceRow .cell,
+.priceRow .rowLabel {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: var(--color-cream-100);
+  letter-spacing: -0.01em;
+}
+
+.priceRow .seedCol {
+  background: rgba(201, 242, 75, 0.22);
+}
+
 .muted { opacity: 0.5; }
 .strong { font-weight: 700; }
 
@@ -241,6 +265,21 @@
   gap: 0.25rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cardRow.priceRow {
+  background: rgba(201, 242, 75, 0.16);
+  border-left: 4px solid var(--color-green-highlight);
+  border-top: 1px solid rgba(201, 242, 75, 0.35);
+  border-right: 1px solid rgba(201, 242, 75, 0.35);
+  border-bottom: 1px solid rgba(201, 242, 75, 0.35);
+  padding: 0.875rem 0.875rem;
+  border-radius: 6px;
+}
+
+.cardRow.priceRow .cardValue {
+  font-size: 1.375rem;
+  font-weight: 900;
 }
 
 .cardRow:last-child {

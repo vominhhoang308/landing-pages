@@ -19,13 +19,6 @@ export const tierHeaders = ['Trials', 'Sprout - monthly', 'Seed - monthly', 'Fru
 
 export const rows: Row[] = [
   {
-    label: 'Price',
-    trials: { text: 'Contact us', strong: true },
-    sprout: { text: '699€', strong: true },
-    seed: { text: '999€', strong: true },
-    fruit: { text: 'Contact us', strong: true },
-  },
-  {
     label: 'Set up fee',
     trials: { text: 'Included' },
     sprout: { text: 'Included' },
@@ -71,8 +64,8 @@ export const rows: Row[] = [
     label: 'Competitor content tracking',
     trials: { text: 'Not included', muted: true },
     sprout: { text: '1 competitor' },
-    seed: { text: '2 competitors' },
-    fruit: { text: '3+ competitors' },
+    seed: { text: '3 competitors' },
+    fruit: { text: '4+ competitors' },
   },
   {
     label: 'Industry trend tracking',
@@ -134,5 +127,12 @@ export const rows: Row[] = [
         'Competitor tracking',
       ],
     },
+  },
+  {
+    label: 'Price',
+    trials: { text: 'Contact us', strong: true },
+    sprout: { text: '699€', strong: true },
+    seed: { text: '999€', strong: true },
+    fruit: { text: 'Contact us', strong: true },
   },
 ]

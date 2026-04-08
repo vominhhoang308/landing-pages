@@ -88,7 +88,7 @@ export function PricingTiers() {
                 </thead>
                 <tbody>
                   {rows.map((row) => (
-                    <tr key={row.label} className={styles.row}>
+                    <tr key={row.label} className={`${styles.row} ${row.label === 'Price' ? styles.priceRow : ''}`}>
                       <td className={styles.rowLabel}>{row.label}</td>
                       <td className={`${styles.cell} ${row.trials.muted ? styles.muted : ''}`}>{renderCell(row.trials)}</td>
                       <td className={`${styles.cell} ${row.sprout.muted ? styles.muted : ''}`}>{renderCell(row.sprout)}</td>
@@ -135,7 +135,7 @@ export function PricingTiers() {
                     {rows.map((row) => {
                       const cell = row[tier.key]
                       return (
-                        <div key={row.label} className={`${styles.cardRow} ${cell.muted ? styles.muted : ''}`}>
+                        <div key={row.label} className={`${styles.cardRow} ${row.label === 'Price' ? styles.priceRow : ''} ${cell.muted ? styles.muted : ''}`}>
                           <dt className={styles.cardLabel}>{row.label}</dt>
                           <dd className={styles.cardValue}>{renderCell(cell)}</dd>
                         </div>
@@ -147,7 +147,7 @@ export function PricingTiers() {
                     {highlightRows.map((row) => {
                       const cell = row[tier.key]
                       return (
-                        <div key={row.label} className={`${styles.cardRow} ${cell.muted ? styles.muted : ''}`}>
+                        <div key={row.label} className={`${styles.cardRow} ${row.label === 'Price' ? styles.priceRow : ''} ${cell.muted ? styles.muted : ''}`}>
                           <dt className={styles.cardLabel}>{row.label}</dt>
                           <dd className={styles.cardValue}>{renderCell(cell)}</dd>
                         </div>
